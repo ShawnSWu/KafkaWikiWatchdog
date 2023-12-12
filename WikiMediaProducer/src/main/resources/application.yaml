@@ -1,0 +1,29 @@
+kafka:
+  bootstrap:
+    servers: fit-killdeer-10386-us1-kafka.upstash.io:9092
+  security:
+    protocol: SASL_SSL
+
+  sasl:
+    jaas:
+      config: org.apache.kafka.common.security.scram.ScramLoginModule required username="Zml0LWtpbGxkZWVyLTEwMzg2JNSTbr8N0_fy1YJLFFxa543y0deJEVEXGUqhqr4" password="NGNjOTNhZTUtZGRiOC00Y2JhLWExOGYtZjdjY2RlOTk5ZjZl";
+
+    mechanism: SCRAM-SHA-256
+
+  partitioner:
+    class: RoundRobinPartitioner
+
+  topic:
+    wikimedia: wikimedia-changes
+
+  key:
+    serializer: StringSerializer
+
+  value:
+    serializer: StringSerializer
+
+
+wikimedia:
+  event:
+    change:
+      url: https://stream.wikimedia.org/v2/stream/recentchange
