@@ -27,15 +27,6 @@ public class KafkaConfig {
     @Value("${kafka.sasl.jaas.config}")
     private String saslJaasConfig;
 
-    @Value("${kafka.key.serializer}")
-    private String keySerializer;
-
-    @Value("${kafka.value.serializer}")
-    private String valueSerializer;
-
-    @Value("${kafka.partitioner.class}")
-    private String partitioner;
-
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {
@@ -44,9 +35,9 @@ public class KafkaConfig {
         properties.put("security.protocol", securityProtocol);
         properties.put("sasl.mechanism", saslMechanism);
         properties.put("sasl.jaas.config", saslJaasConfig);
-        properties.put("partitioner.class", partitioner);
-        properties.put("key.serializer", keySerializer);
-        properties.put("value.serializer", valueSerializer);
+        properties.put("partitioner.class", RoundRobinPartitioner.class.getName());
+        properties.put("key.serializer", StringSerializer.class.getName());
+        properties.put("value.serializer", StringSerializer.class.getName());
         properties.put("batch.size", "400");
         return new DefaultKafkaProducerFactory<>(properties);
     }

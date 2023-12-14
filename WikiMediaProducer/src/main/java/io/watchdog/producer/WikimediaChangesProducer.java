@@ -1,6 +1,7 @@
 package io.watchdog.producer;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -12,8 +13,7 @@ import reactor.util.retry.Retry;
 
 import java.time.Duration;
 
-//配置好Log才能看訊息
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class WikimediaChangesProducer implements CommandLineRunner {
@@ -39,8 +39,11 @@ public class WikimediaChangesProducer implements CommandLineRunner {
 
         sseFlux.subscribe(
                 event -> kafkaTemplate.send(topic, event),
-                error -> {},
-                () -> {}
+                error -> {
+                    log.error(error.getMessage());
+                },
+                () -> {
+                }
         );
     }
 }
