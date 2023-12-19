@@ -1,3 +1,4 @@
 rootProject.name = 'KafkaWikiWatchdog'
-include 'WikiMediaProducer'
+include 'wikimedia-producer'
+include 'opensearch-cousumer'
 
