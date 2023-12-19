@@ -1,5 +1,6 @@
 package io.watchdog.infra;
 
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.RoundRobinPartitioner;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,14 +32,21 @@ public class KafkaConfig {
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object>  properties = new HashMap<>();
-        properties.put("bootstrap.servers", bootstrapServers);
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         properties.put("security.protocol", securityProtocol);
         properties.put("sasl.mechanism", saslMechanism);
         properties.put("sasl.jaas.config", saslJaasConfig);
-        properties.put("partitioner.class", RoundRobinPartitioner.class.getName());
-        properties.put("key.serializer", StringSerializer.class.getName());
-        properties.put("value.serializer", StringSerializer.class.getName());
-        properties.put("batch.size", "400");
+        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, RoundRobinPartitioner.class.getName());
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, "400");
+
+
+        //set safe producer (if kafka <= 2.8
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
+        properties.put(ProducerConfig.ACKS_CONFIG, "all");
+        properties.put(ProducerConfig.RETRIES_CONFIG, Integer.toString(Integer.MAX_VALUE));
+
         return new DefaultKafkaProducerFactory<>(properties);
     }
 
