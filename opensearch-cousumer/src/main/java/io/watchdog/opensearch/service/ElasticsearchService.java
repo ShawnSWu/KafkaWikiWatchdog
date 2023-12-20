@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.opensearch.action.admin.indices.create.CreateIndexRequest;
+import org.opensearch.client.indices.GetIndexRequest;
 import org.opensearch.action.bulk.BulkRequest;
 import org.opensearch.action.bulk.BulkResponse;
 import org.opensearch.action.index.IndexRequest;
@@ -22,6 +24,8 @@ public class ElasticsearchService {
 
     private final RestHighLevelClient openSearchClient;
 
+    private String OPEN_SEARCH_INDEX = "wikimedia";
+
     public int save(ConsumerRecords<String, String> records) throws IOException {
         BulkRequest bulkRequest = new BulkRequest();
 
@@ -33,7 +37,6 @@ public class ElasticsearchService {
                     .id(id);
             bulkRequest.add(indexRequest);
         }
-
 
         if (bulkRequest.numberOfActions() > 0) {
             BulkResponse bulkResponse = openSearchClient.bulk(bulkRequest, RequestOptions.DEFAULT);
@@ -58,6 +61,15 @@ public class ElasticsearchService {
                 .getAsJsonObject()
                 .get("id")
                 .getAsString();
+    }
+
+    public void createIndex() throws IOException {
+        CreateIndexRequest createIndexRequest = new CreateIndexRequest("wikimedia");
+        openSearchClient.indices().create(createIndexRequest, RequestOptions.DEFAULT);
+    }
+
+    public boolean isIndexExist() throws IOException {
+        return openSearchClient.indices().exists(new GetIndexRequest(OPEN_SEARCH_INDEX), RequestOptions.DEFAULT);
     }
 
 }

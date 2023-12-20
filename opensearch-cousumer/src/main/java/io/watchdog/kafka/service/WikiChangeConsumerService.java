@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.Collections;
 
+import static org.apache.commons.lang3.BooleanUtils.isFalse;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -27,6 +29,13 @@ public class WikiChangeConsumerService implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         setUpShutdownHook();
+
+        if (isFalse(elasticsearchService.isIndexExist())) {
+            elasticsearchService.createIndex();
+            log.info("The Wikimedia Index has been created!");
+        } else {
+            log.info("The Wikimedia Index already exits");
+        }
 
         kafkaConsumer.subscribe(Collections.singleton(topic));
 
