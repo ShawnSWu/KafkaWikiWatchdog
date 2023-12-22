@@ -1,6 +1,15 @@
 version: '3.7'
 services:
 
+  zookeeper:
+    image: bitnami/zookeeper:3.6.3
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    ports:
+      - 2181:2181
+    networks:
+      - kafka-network
+
   kafka:
     image: bitnami/kafka:2.8.0
     environment:
@@ -16,18 +25,8 @@ services:
       - 9094:9094
     networks:
       - kafka-network
-
     depends_on:
       - zookeeper
-
-  zookeeper:
-    image: bitnami/zookeeper:3.6.3
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-    ports:
-      - 2181:2181
-    networks:
-      - kafka-network
 
   opensearch:
     image: opensearchproject/opensearch:1.2.4
@@ -38,6 +37,8 @@ services:
     ports:
       - 9200:9200
       - 9600:9600 # required for Performance Analyzer
+    depends_on:
+      - kafka
 
   # console at http://localhost:5601/app/dev_tools#/console
   opensearch-dashboards:
@@ -47,6 +48,8 @@ services:
     environment:
       OPENSEARCH_HOSTS: '["http://opensearch:9200"]'
       DISABLE_SECURITY_DASHBOARDS_PLUGIN: "true"
+    depends_on:
+      - opensearch
 
 networks:
   kafka-network:
