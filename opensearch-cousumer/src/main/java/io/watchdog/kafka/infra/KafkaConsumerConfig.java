@@ -35,9 +35,9 @@ public class KafkaConsumerConfig {
     private KafkaConsumer<String, String> kafkaConsumer(){
         Map<String, Object>  properties = new HashMap<>();
         properties.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        properties.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, securityProtocol);
-        properties.put("sasl.mechanism", saslMechanism);
-        properties.put("sasl.jaas.config", saslJaasConfig);
+//        properties.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, securityProtocol);
+//        properties.put("sasl.mechanism", saslMechanism);
+//        properties.put("sasl.jaas.config", saslJaasConfig);
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);

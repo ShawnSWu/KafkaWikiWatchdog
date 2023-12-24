@@ -1,6 +1,6 @@
 kafka:
   bootstrap:
-    servers: united-hare-11568-us1-kafka.upstash.io:9092
+    servers: localhost:9092
   security:
     protocol: SASL_SSL
 
