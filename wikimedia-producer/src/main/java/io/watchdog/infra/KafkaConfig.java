@@ -33,9 +33,9 @@ public class KafkaConfig {
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object>  properties = new HashMap<>();
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        properties.put("security.protocol", securityProtocol);
-        properties.put("sasl.mechanism", saslMechanism);
-        properties.put("sasl.jaas.config", saslJaasConfig);
+//        properties.put("security.protocol", securityProtocol);
+//        properties.put("sasl.mechanism", saslMechanism);
+//        properties.put("sasl.jaas.config", saslJaasConfig);
         properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, RoundRobinPartitioner.class.getName());
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());

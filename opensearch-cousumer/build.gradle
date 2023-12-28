@@ -9,8 +9,28 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter', version: SPRING_BOOT_VERSION
+
+    //KAFKA
+    implementation 'org.apache.kafka:kafka-clients:3.3.1'
+
+    // SLF4J
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: SLF4J_VERSION
+
+    //OPEN SEARCH
+    implementation group: 'org.opensearch.client', name: 'opensearch-rest-high-level-client', version: OPENSERACH_VERSION
+
+    //GSON
+    implementation group: 'com.google.code.gson', name: 'gson', version: GSON_VERSION
+
+    //APACHE COMMONS
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: APACHE_COMMON_VERSION
+
+
+    //LOMBOK
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: LOMBOK_VERSION
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: LOMBOK_VERSION
 }
 
 test {

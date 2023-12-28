@@ -13,10 +13,12 @@ kafka:
   topic:
     wikimedia: wikimedia-changes
 
-wikimedia:
-  event:
-    change:
-      url: https://stream.wikimedia.org/v2/stream/recentchange
+  group-id: consumer-opensearch
+
+
+open-search:
+  url: localhost
+  port: 9200
 
 
 logging:

@@ -9,7 +9,7 @@
     </appender>
     <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/Users/shawnwu/kafka-wiki-watch-dog/producer/${logback.fileName}</fileNamePattern>
+            <fileNamePattern>/Users/shawnwu/kafka-wiki-watch-dog/consumer/${logback.fileName}</fileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{50} - %msg%n</pattern>
