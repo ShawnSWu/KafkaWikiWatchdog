@@ -28,6 +28,12 @@ services:
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
       KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+
+#   Add security config after completion of development
+    volumes:
+      - './kafka_server_jaas.conf:/etc/kafka/secrets/kafka_server_jaas.conf'
+      - './kafka.keystore.jks:/etc/kafka/secrets/kafka.keystore.jks'
+      - './kafka.truststore.jks:/etc/kafka/secrets/kafka.truststore.jks'
     depends_on:
       - zoo1
 
@@ -47,6 +53,12 @@ services:
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
       KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+
+    #   Add security config after completion of development
+    volumes:
+      - './kafka_server_jaas.conf:/etc/kafka/secrets/kafka_server_jaas.conf'
+      - './kafka.keystore.jks:/etc/kafka/secrets/kafka.keystore.jks'
+      - './kafka.truststore.jks:/etc/kafka/secrets/kafka.truststore.jks'
     depends_on:
       - zoo1
 
@@ -67,6 +79,12 @@ services:
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
       KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+
+    #   Add security config after completion of development
+    volumes:
+      - './kafka_server_jaas.conf:/etc/kafka/secrets/kafka_server_jaas.conf'
+      - './kafka.keystore.jks:/etc/kafka/secrets/kafka.keystore.jks'
+      - './kafka.truststore.jks:/etc/kafka/secrets/kafka.truststore.jks'
     depends_on:
       - zoo1
 
