@@ -1,0 +1,7 @@
+open-search:
+  url: localhost
+  port: 9200
+
+
+logging:
+  config: classpath:logback-spring.xml

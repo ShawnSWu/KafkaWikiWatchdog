@@ -1,4 +1,5 @@
 rootProject.name = 'KafkaWikiWatchdog'
 include 'wikimedia-producer'
 include 'opensearch-cousumer'
+include 'wiki-change-searchor-application'
 

@@ -1,6 +1,6 @@
 package io.watchdog.kafka.service;
 
-import io.watchdog.opensearch.service.ElasticsearchService;
+import io.watchdog.wikichange.service.ElasticsearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
