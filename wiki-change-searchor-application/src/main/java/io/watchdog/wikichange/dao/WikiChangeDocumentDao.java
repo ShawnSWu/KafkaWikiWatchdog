@@ -2,14 +2,14 @@ package io.watchdog.wikichange.dao;
 
 import io.watchdog.infra.tool.OpenSearchTool;
 import io.watchdog.wikichange.converter.WikiChangeDocumentConverter;
-import io.watchdog.wikichange.domain.WikiChangeDocument;
-import io.watchdog.wikichange.pojo.vo.PaginationReq;
+import io.watchdog.wikichange.pojo.vo.EnquireWikiChangeReq;
+import io.watchdog.wikichange.pojo.vo.EnquiryWikiChangeRes;
 import lombok.RequiredArgsConstructor;
+import org.opensearch.action.search.SearchResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -18,13 +18,17 @@ public class WikiChangeDocumentDao {
     private final OpenSearchTool openSearchTool;
     private final WikiChangeDocumentConverter wikiChangeConverter;
 
-    public List<WikiChangeDocument> search(String keywords, PaginationReq paginationReq) {
+    public EnquiryWikiChangeRes search(EnquireWikiChangeReq req) {
         String indexName = "wikimedia_change";
 
         List<String> fields = Arrays.asList("title", "comment");
 
-        List<String> results = openSearchTool.multiMatchQuery(keywords, indexName, fields, paginationReq);
+        long startTime = System.currentTimeMillis();
 
-        return results.stream().map(wikiChangeConverter::toWikiChangeDocument).collect(Collectors.toList());
+        SearchResponse searchResponse = openSearchTool.multiMatchQuery(req, indexName, fields);
+
+        long queryTime = System.currentTimeMillis() - startTime;
+
+        return wikiChangeConverter.toEnquiryWikiChangeRes(searchResponse, queryTime);
     }
 }

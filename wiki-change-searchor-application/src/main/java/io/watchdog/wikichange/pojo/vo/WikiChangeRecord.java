@@ -5,17 +5,19 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnquiryWikiChangeRes {
+public class WikiChangeRecord {
 
-    private long totalSize;
+    private String title;
 
-    private List<WikiChangeRecord> records;
+    private String titleUrl;
 
-    private long queryTime;
+    private String comment;
+
+    private String domainName;
+
+    private String domainUrl;
 }
