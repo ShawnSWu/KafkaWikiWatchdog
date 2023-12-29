@@ -1,6 +1,6 @@
 package io.watchdog.wikichange.controller;
 
-import io.watchdog.wikichange.domain.WikiChangeDocument;
+import io.watchdog.wikichange.pojo.vo.EnquiryWikiChangeRes;
 import io.watchdog.wikichange.pojo.vo.PaginationReq;
 import io.watchdog.wikichange.service.WikiChangeService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class WikiChangeController {
     private final WikiChangeService wikiChangeService;
 
     @PostMapping("/search")
-    public List<WikiChangeDocument> search(@RequestParam("keywords") String keywords, @RequestBody PaginationReq paginationReq) {
+    public List<EnquiryWikiChangeRes> search(@RequestParam("keywords") String keywords, @RequestBody PaginationReq paginationReq) {
         return wikiChangeService.search(keywords, paginationReq);
     }
 }
