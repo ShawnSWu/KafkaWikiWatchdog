@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+open-search:
+  url: opensearch
+  port: 9200
+
+
+logging:
+  config: classpath:logback-spring.xml

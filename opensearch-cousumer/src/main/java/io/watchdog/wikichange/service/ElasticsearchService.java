@@ -1,4 +1,4 @@
-package io.watchdog.opensearch.service;
+package io.watchdog.wikichange.service;
 
 import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class ElasticsearchService {
 
     private final RestHighLevelClient openSearchClient;
 
-    private String OPEN_SEARCH_INDEX = "wikimedia";
+    private String OPEN_SEARCH_INDEX = "wikimedia_change";
 
     public int save(ConsumerRecords<String, String> records) throws IOException {
         BulkRequest bulkRequest = new BulkRequest();
@@ -32,7 +32,7 @@ public class ElasticsearchService {
         for (ConsumerRecord<String, String> record : records) {
             // send the record into OpenSearch
             String id = extractId(record.value());
-            IndexRequest indexRequest = new IndexRequest("wikimedia")
+            IndexRequest indexRequest = new IndexRequest(OPEN_SEARCH_INDEX)
                     .source(record.value(), XContentType.JSON)
                     .id(id);
             bulkRequest.add(indexRequest);
@@ -64,7 +64,7 @@ public class ElasticsearchService {
     }
 
     public void createIndex() throws IOException {
-        CreateIndexRequest createIndexRequest = new CreateIndexRequest("wikimedia");
+        CreateIndexRequest createIndexRequest = new CreateIndexRequest(OPEN_SEARCH_INDEX);
         openSearchClient.indices().create(createIndexRequest, RequestOptions.DEFAULT);
     }
 
