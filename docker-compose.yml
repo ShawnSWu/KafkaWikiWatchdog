@@ -153,6 +153,7 @@ services:
       - kafka3
     networks:
       - watchdog-network
+    restart: on-failure
 
   wikimedia_producer:
     hostname: wikimedia_producer
@@ -162,11 +163,12 @@ services:
     container_name: wikimedia_producer
     ports:
       - "8083:8083"
+    restart: on-failure
     depends_on:
+      - opensearch
       - kafka1
       - kafka2
       - kafka3
-      - opensearch
     networks:
       - watchdog-network
 
