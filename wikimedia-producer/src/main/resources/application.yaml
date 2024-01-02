@@ -1,6 +1,6 @@
 kafka:
   bootstrap:
-    servers: localhost:9092
+    servers: kafka1:9092
   security:
     protocol: SASL_SSL
 
