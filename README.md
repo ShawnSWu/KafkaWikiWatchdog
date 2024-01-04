@@ -23,7 +23,7 @@ In general, the selection of an appropriate number of Zookeepers and Brokers sho
 
 --
 ## Preview
-![](https://i.imgur.com/PudkIAT.gif)
+![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWVtZWMybmZpemZ1ZDU1YmV1ODhldzNjb21wOXB4d3JlZm40cHQ5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eLKnHP2zFqhKiUr1UF/giphy.gif)
 
 ## Front-End Vue project
 [https://github.com/ShawnSWu/WikiHistory-Searchor](https://github.com/ShawnSWu/WikiHistory-Searchor)
