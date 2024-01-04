@@ -13,7 +13,7 @@ The data source is the real-time change data provided by the Wikimedia Foundatio
 ## Why one ZK three Broker
 Typically, at least three Zookeepers are needed for fault tolerance. However, for the focus of this project on Kafka, it is assumed that the Zookeeper is definitely stable. That's why only one Zookeeper is configured in this project.
 
-## Wht three Broker
+## Why three Broker
 At least three brokers are typically required to achieve basic fault tolerance in Kafka.
 This allows Kafka to continue providing reliable services even in the event of a broker failure, thanks to the election mechanism facilitated by Zookeeper, which selects a new leader broker to ensure uninterrupted service.
 
